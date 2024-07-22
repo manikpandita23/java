@@ -1,0 +1,8 @@
+{
+    "java.project.sourcePaths": [
+        "."
+    ],
+    "java.project.referencedLibraries": [
+        "c:\\Users\\manik\\OneDrive\\Desktop\\jdk-22.0.2\\lib\\jrt-fs.jar"
+    ]
+}
