@@ -51,8 +51,6 @@ public class HangmanGame {
             if (word.indexOf(letter) != -1) {
                 System.out.println(letter + " is present in the word.");
                 System.out.print("\n");
-
-                // Create a new display string with the guessed letter revealed
                 StringBuilder newDisplay = new StringBuilder(wordDisplay.replaceAll(" ", ""));
                 for (int i = 0; i < word.length(); i++) {
                     if (word.charAt(i) == letter) {
