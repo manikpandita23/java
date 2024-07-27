@@ -2,10 +2,13 @@ import java.util.Scanner;
 import java.util.Random;
 
 public class HangmanGame {
+
     private static Scanner input = new Scanner(System.in);
+
     public static void main(String[] args) {
         hangman();
     }
+
     public static void hangman() {
         String[] company = { "Maruti", "Tata", "Suzuki", "Ducati", "Toyota" };
         System.out.println("Welcome to HANGMAN GAME");
@@ -17,43 +20,52 @@ public class HangmanGame {
         System.out.println("Let's play the game");
         startGame(word, wordDisplay);
     }
+
     public static void startGame(String word, String wordDisplay) {
         int totalGuesses = 5;
         int wrongGuesses = 0;
         String guessedLetters = "";
         String guess;
         char letter;
+
         while (wrongGuesses < totalGuesses && wordDisplay.contains("_")) {
             System.out.println(wordDisplay + "\n");
             int remainingGuesses = totalGuesses - wrongGuesses;
+
             if (wrongGuesses != 0) {
                 System.out.println("You have " + remainingGuesses + " guesses left.");
             }
+
             System.out.print("Your Guess: ");
             guess = input.nextLine().toUpperCase();
             letter = guess.charAt(0);
+
             if (guessedLetters.contains(String.valueOf(letter))) {
                 System.out.println("You ALREADY guessed " + letter + ". \n");
                 continue;
             }
+
             guessedLetters += letter;
             System.out.println();
+
             if (word.indexOf(letter) != -1) {
                 System.out.println(letter + " is present in the word.");
                 System.out.print("\n");
+
+                // Create a new display string with the guessed letter revealed
+                StringBuilder newDisplay = new StringBuilder(wordDisplay.replaceAll(" ", ""));
                 for (int i = 0; i < word.length(); i++) {
                     if (word.charAt(i) == letter) {
-                        wordDisplay = wordDisplay.replaceAll("_ ", "_");
-                        String wordUpdated = wordDisplay.substring(0, i * 2) + letter + wordDisplay.substring(i * 2 + 1);
-                        wordDisplay = wordUpdated.replaceAll("_", "_ ");
+                        newDisplay.setCharAt(i, letter);
                     }
                 }
-            }
-            else {
+                wordDisplay = newDisplay.toString().replaceAll("", " ").trim();
+            } else {
                 System.out.println(letter + " is not present in the word.");
                 wrongGuesses++;
             }
         }
+
         if (wrongGuesses == totalGuesses) {
             System.out.println("YOU LOST! Maximum limit of incorrect guesses reached.");
         } else {
